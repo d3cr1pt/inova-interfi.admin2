@@ -32,7 +32,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto"><!-- lista cabeçalho -->
           <li class="nav-item active">
-            <a class="nav-link" href="<?= BASEURL; ?>home.php">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?= BASEURL; ?>">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASEURL; ?>usuario">Usuários</a>
