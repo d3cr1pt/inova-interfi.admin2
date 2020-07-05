@@ -70,7 +70,7 @@
             <img class="mb-4" src="<?=BASEURL?>/img/logo.png" alt="" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Por-favor logue</h1>
             <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="interfi@interfi.net" required="" autofocus="">
+            <input type="text" id="inputEmail" class="form-control" placeholder="interfi@interfi.net" required="" autofocus="">
             <label for="inputPassword" class="sr-only">Senha</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="******" required="">
             <div class="checkbox mb-3">
