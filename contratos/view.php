@@ -5,7 +5,7 @@
 
 <?php include(HEADER_TEMPLATE); ?>
 
-<h2>Usuário #<?=$customer['id']?> - <?=$customer['fullname']; ?></h2>
+<h2>Contrato:<?=$customer['n_contrato']?> // <?=$customer['razao_social']; ?></h2>
 <hr>
 
 <?php if (!empty($_SESSION['message'])) : ?>
@@ -13,14 +13,21 @@
 <?php endif; ?>
 
 <dl class="dl-horizontal">
-	<dt>Nome do Usuário:</dt>
-	<dd><?=$customer['fullname']; ?></dd>
+	<dt>Representante do contrato:</dt>
+	<dd><?=$customer['nome_socio']; ?></dd>
 
-	<dt>Idade:</dt>
-	<dd><?=$customer['birthdate']; ?></dd>
+	<dt>Empresa:</dt>
+	<dd><?=$customer['razao_social']; ?></dd>
+
+	<dt>Cnpj:</dt>
+	<dd><?=$customer['cnpj']; ?></dd>
+
+	<dt>Usuario:</dt>
+    <dd><?=$customer['usuario_socio']; ?></dd>
 
 	<dt>E-mail:</dt>
-    <dd><?=$customer['username']; ?></dd>
+    <dd><?=$customer['email_socio']; ?></dd>
+	
 </dl>
 
 <div id="actions" class="mt-2 row">

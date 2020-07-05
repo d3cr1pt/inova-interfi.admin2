@@ -69,9 +69,12 @@ function edit() {
 /**
  *  Visualização de um contrato
  */
-function view($id = null) {
-	
-  }
+
+function view($id) {
+	global $customer;
+	$customer = find('contrato',$id);
+}
+
 
   function delete($id) {
 	$db = open_database();
