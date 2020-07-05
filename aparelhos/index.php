@@ -11,6 +11,7 @@
 			<h2>Aparelhos</h2>
 		</div>
 		<div class="col-sm-6 text-right h2">
+		<a class="btn btn-danger font-weight-bolder" href="add.php"><i class="fas fa-plus"></i>&nbsp;Adicionar</a>
 	    	<a class="btn btn-primary font-weight-bolder" href="index.php"><i class="fas fa-sync-alt"></i> Atualizar</a>
 	    </div>
 	</div>
