@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-group col-md-4">
-      <label for="name">Cnpj</label>
+      <label for="name">CNPJ</label>
       <input type="text" class="form-control" name="customer['cnpj']">
     </div>
 
