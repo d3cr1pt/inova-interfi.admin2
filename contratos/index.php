@@ -47,7 +47,6 @@
 		<td><?php echo $customer['nome_socio']; ?></td>
 		<td><?php echo $customer['email_socio']; ?></td>
 		<td class="actions text-right">
-			<a href="view.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i> Visualizar</a>
 			<a href="edit.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-pen"></i> Editar</a>
 			<a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-modal" data-customer="<?php echo $customer['id']; ?>">
 				<i class="fa fa-trash"></i> Excluir
