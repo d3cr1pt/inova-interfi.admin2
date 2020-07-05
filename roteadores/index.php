@@ -8,7 +8,7 @@
 <header>
 	<div class="row">
 		<div class="col-sm-6">
-			<h2>Aparelhos</h2>
+			<h2>Roteadores</h2>
 		</div>
 		<div class="col-sm-6 text-right h2">
 		<a class="btn btn-danger font-weight-bolder" href="add.php"><i class="fas fa-plus"></i>&nbsp;Adicionar</a>
@@ -30,9 +30,10 @@
 <thead>
 	<tr>
 		<th>ID</th>
-		<th width="30%">Aparelho</th>
-		<th width="30%">Prefixo Carro</th>
-		<th>MAC</th>
+		<th>Aparelho</th>
+		<th>SSID</th>
+		<th>Suporte Login</th>
+		<th>Suporte Senha</th>
 		<th class="text-right">Opções</th>
 
 	</tr>
@@ -42,11 +43,11 @@
 <?php foreach ($customers as $customer) : ?>
 	<tr>
 		<td><?php echo $customer['id']; ?></td>
-		<td><?php echo $customer['id_aparelho']; ?></td>
-		<td><?php echo $customer['prefix_carro']; ?></td>
-		<td><?php echo $customer['mac_aparelho']; ?></td>
+		<td><?php echo $customer['id']; ?></td>
+		<td><?php echo $customer['original_ssid']; ?></td>
+		<td><?php echo $customer['support_user']; ?></td>
+		<td><?php echo $customer['support_password']; ?>
 		<td class="actions text-right">
-			<a href="restart.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-warning"><i class="fas fa-sync-alt"></i> Reiniciar Aparelho </a>
 			<a href="view.php?id=<?php echo $customer['id']; ?>" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> Visualizar</a>
 		</td>
 	</tr>

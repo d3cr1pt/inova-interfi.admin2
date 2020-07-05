@@ -12,26 +12,23 @@
   <hr />
   <div class="row">
     <div class="form-group col-md-3">
-      <label for="name">ID Vivo</label>
-      <select class="custom-select mr-sm-2" name="customer['id_vivo']" required>
-      <option value="" disabled selected> Selecione </option>
-      <option value="1"> Externo/Testes </option>
-      </select>
+      <label for="campo2">Nome da Rede Wifi (original)</label>
+      <input type="text" class="form-control" name="customer['original_ssid']" maxlength="32" required value="Vivo-Internet-">
     </div>
 
     <div class="form-group col-md-3">
-      <label for="campo2">Prefixo Carro</label>
-      <input type="text" class="form-control" name="customer['prefix_carro']" maxlength="12" required>
+      <label for="campo3">Senha do Wifi (original)</label>
+      <input type="text" class="form-control" name="customer['original_password']" maxlength="12" required>
     </div>
 
     <div class="form-group col-md-3">
-      <label for="campo3">ID Aparelho</label>
-      <input type="text" class="form-control" name="customer['id_aparelho']" maxlength="12" required>
+      <label for="campo3">Login de Suporte</label>
+      <input type="text" class="form-control" name="customer['support_user']" maxlength="24" required value="admin">
     </div>
 
     <div class="form-group col-md-3">
-      <label for="campo3">ID Aparelho</label>
-      <input type="text" class="form-control" name="customer['mac_aparelho']" maxlength="24" required> 
+      <label for="campo4">Senha de Suporte</label>
+      <input type="text" class="form-control" name="customer['support_password']" maxlength="24" required value="vivo">
     </div>
   </div>
   

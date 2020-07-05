@@ -11,7 +11,7 @@ $customer = null;
  */
 function index() {
 	global $customers;
-	$customers = find_all('aparelhos');
+	$customers = find_all('roteadores');
 }
 
 /**
@@ -26,7 +26,7 @@ function add() {
   
 	  $customer = $_POST['customer'];
 	  $customer['modified'] = $customer['created'] = $today->format("Y-m-d H:i:s");
-	  save('aparelhos', $customer);
+	  save('roteadores', $customer);
 	  header('location: index.php');
 	}
   }
@@ -72,13 +72,6 @@ $unifiServer =  "https://ubnt.interfi.net:8443";
 }
 
 function view($id) {
-	$db = open_database();
 	global $aparelho;
-	$aparelho = find('aparelhos', $id);
-	$id_contrato = $aparelho['id_contrato'];
-	global $customer;
-	$customer = find('contrato',$id_contrato);
-	global $sessions;
-	$query3 = $db->query("SELECT COUNT(sessions.id) AS usuarios_conectados FROM sessions LEFT JOIN users ON (sessions.user_id=users.id) LEFT JOIN contrato ON (users.id_contrato=contrato.id) WHERE id_contrato = '$id_contrato'");
-	$sessions = $query3->fetch_assoc();
+	$aparelho = find('roteadores', $id);
 }
