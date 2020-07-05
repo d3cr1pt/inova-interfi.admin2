@@ -9,6 +9,7 @@
     <script src="<?= BASEURL; ?>js/jquery-3.4.1.min.js"></script>
     <script src="<?= BASEURL; ?>js/popper.min.js"></script>
     <script src="<?= BASEURL; ?>bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <link rel="stylesheet" href="<?= BASEURL; ?>bootstrap/css/bootstrap.min.css">
     <style>
         body {
