@@ -37,6 +37,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?= BASEURL; ?>usuario">Usuários</a>
           </li>
+	  <li class="nav-item">
+            <a class="nav-link" href="<?=BASEURL?>/roteadores">Roteadores</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASEURL; ?>funcionario">Funcionários</a>
           </li>
