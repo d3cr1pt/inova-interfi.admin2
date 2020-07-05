@@ -34,6 +34,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="<?= BASEURL; ?>">Home <span class="sr-only">(current)</span></a>
           </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="<?=BASEURL?>contratos">Contratos</a>
+	  </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASEURL; ?>usuario">Usuários</a>
           </li>
