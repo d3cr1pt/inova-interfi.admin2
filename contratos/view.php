@@ -5,7 +5,7 @@
 
 <?php include(HEADER_TEMPLATE); ?>
 
-<h2>Contrato:<?=$customer['n_contrato']?> // <?=$customer['razao_social']; ?></h2>
+<h2>CNPJ: <?=$customer['cnpj']; ?> // <?=$customer['razao_social']; ?></h2>
 <hr>
 
 <?php if (!empty($_SESSION['message'])) : ?>
@@ -16,13 +16,16 @@
 	<dt>Representante do contrato:</dt>
 	<dd><?=$customer['nome_socio']; ?></dd>
 
+	<dt>Codigo de Contrato:</dt>
+	<dd><?=$customer['n_contrato']?> </dd>
+	
+
 	<dt>Empresa:</dt>
 	<dd><?=$customer['razao_social']; ?></dd>
 
-	<dt>Cnpj:</dt>
-	<dd><?=$customer['cnpj']; ?></dd>
+	
 
-	<dt>Usuario:</dt>
+	<dt>Usuario:(admin)</dt>
     <dd><?=$customer['usuario_socio']; ?></dd>
 
 	<dt>E-mail:</dt>
