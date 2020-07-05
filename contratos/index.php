@@ -9,7 +9,7 @@
 <header>
 	<div class="row">
 		<div class="col-sm-6">
-			<h2>Funcionários</h2>
+			<h2>Contrato</h2>
 		</div>
 		<div class="col-sm-6 text-right h2">
 	    	<a class="btn btn-primary" href="add.php"><i class="fas fa-plus"></i> Novo Contrato</a>
