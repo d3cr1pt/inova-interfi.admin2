@@ -1,6 +1,13 @@
 <?php
-    require_once('functions.php');
-    index();
+    //require_once('functions.php');
+    //index();
+     require_once('../config.php');
+     require_once(DBAPI);
+     $db = open_database();
+     $query = $db->query("SELECT * FROM contrato");
+     global $contratos;
+     $contratos = [];
+     while($contrato=$query->fetch_assoc()) { $contratos[]=$contrato; }
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>

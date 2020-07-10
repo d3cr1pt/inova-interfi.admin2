@@ -1,13 +1,3 @@
-<?php
-if(!empty($_SESSION['sudo'])){
-
-}
-else{
-  header('location: login.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
