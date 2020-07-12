@@ -1,7 +1,6 @@
 <?php
-   session_start();
-    require_once('functions.php');
-    index();
+   require_once('functions.php');
+   index();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>

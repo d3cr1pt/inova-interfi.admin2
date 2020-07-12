@@ -43,7 +43,7 @@
 
     <div class="form-group col-md-4">
       <label for="campo3">Senha</label>
-      <input type="password" class="form-control" name="pass">
+      <input type="password" class="form-control" name="customer['senha_socio']">
     </div>
   </div>
   

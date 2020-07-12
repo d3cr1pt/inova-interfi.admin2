@@ -6,7 +6,7 @@
 <?php include(HEADER_TEMPLATE); ?>
 
 <header>
-   <h2>[ADM] Selecionar Contrato - Relatório: Acessos (por roteador)</h2>
+   <h2>[ADM] Selecionar Contrato - Relatório: Acessos (por dia)</h2>
 </header>
 
 <?php if (!empty($_SESSION['message'])) : ?>
@@ -32,7 +32,7 @@
    <tr>
       <td><?=$customer['razao_social']?></td>
       <td class="text-right">
-         <a href="acessos_roteadores_contrato.php?id=<?=$customer['id']?>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Ver relatório</a>
+         <a href="acessos_contrato_contrato.php?id=<?=$customer['id']?>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Ver relatório</a>
       </td>
    </tr>
 <?php endforeach;?>

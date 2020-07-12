@@ -1,5 +1,4 @@
 <?php
-   session_start();
    require_once('functions.php');
    acessos_roteadores_contrato($_GET['id']);
 ?>

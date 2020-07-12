@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once('../config.php');
 require_once(DBAPI);
 
@@ -16,6 +16,10 @@ function index() {
 	
 }
 
+function clear_messages() {
+	unset($_SESSION['message']);
+}
+
 /**
  *  Cadastro de Contrato
  */
@@ -27,12 +31,11 @@ function add() {
 		date_create('now', new DateTimeZone('America/Sao_Paulo'));
 		
 	  $customer = $_POST['customer'];
-	  $pass = filter_input(INPUT_POST,'pass');
-	  $customer['password'] = md5($pass);
+	  $pass = filter_input(INPUT_POST,'senha_socio');
+	  $customer['senha_socio'] = md5($pass);
 	  $customer['modified'] = $customer['created'] = $today->format("Y-m-d H:i:s");
-	  $customer['sudo'] = 0;
 	  save('contrato', $customer);
-	//   header('location: index.php');
+	  header('location: index.php');
 	}
   }
 
