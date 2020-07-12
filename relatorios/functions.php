@@ -7,6 +7,20 @@ $customers = null;
 $customer = null;
 
 /**
+ * Limpa as mensagens do banco
+ */
+function clear_messages() {
+	unset($GLOBALS['messages']);
+}
+
+function isADM() {
+	if($_SESSION['sudo'] == "1") {
+		return true;
+	}
+	return false;
+}
+
+/**
  *  Listagem de Clientes
  */
 function index() {
@@ -81,4 +95,22 @@ function view($id) {
 	global $sessions;
 	$query3 = $db->query("SELECT COUNT(sessions.id) AS usuarios_conectados FROM sessions LEFT JOIN users ON (sessions.user_id=users.id) LEFT JOIN contrato ON (users.id_contrato=contrato.id) WHERE id_contrato = '$id_contrato'");
 	$sessions = $query3->fetch_assoc();
+}
+
+function acessos_roteadores() {
+	global $customers;
+	if(!isADM()) {
+		header("Location: acessos_roteadores.php?id=".$_SESSION['id_contrato']);
+	}
+	$db = open_database();
+	$SQL = "SELECT * FROM contrato";
+	$query = $db->query($SQL);
+	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+}
+function acessos_roteadores_contrato($id) {
+	global $customers;
+	$db = open_database();
+	$SQL = "SELECT * FROM aparelhos WHERE id_contrato='$id'";
+	$query = $db->query($SQL);
+	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 }

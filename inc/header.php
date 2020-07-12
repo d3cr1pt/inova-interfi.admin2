@@ -1,3 +1,10 @@
+<?php
+  if(isset($_SESSION['loggedin'])) {
+    
+  } else {
+    header("Location: ".BASEURL."login.php");
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +31,7 @@
 
   <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="http://interfi.net"><img src="<?=BASEURL;?>img/logo.png"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -63,4 +70,4 @@
     </nav>
   </header>
 
-    <main class="container-fluid" style="margin-top:60px;">
+    <main class="container-fluid" style="margin-top:60px; padding-bottom: 60px;">

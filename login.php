@@ -1,4 +1,8 @@
-<?php require './config.php'?>
+<?php 
+require_once('./config.php');
+require_once('./functions.php');
+login();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,11 +66,11 @@
         }
 
     </style>
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>font/css/all.css">
+    <link rel="stylesheet" href="<?=BASEURL; ?>css/style.css">
+    <link rel="stylesheet" href="<?=BASEURL; ?>font/css/all.css">
     </head>
     <body class="text-center">
-        <form class="form-signin">
+        <form class="form-signin" action="#" method="POST">
             <img class="mb-4" src="<?=BASEURL?>/img/logo.png" alt="" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Por-favor logue</h1>
             <label for="inputEmail" class="sr-only">Email</label>
