@@ -11,7 +11,15 @@
   <!-- area de campos do form -->
   <hr />
   <div class="row">
-    <div class="form-group col-md-7">
+    <div class="form-group col-md-3">
+      <label for="name">Contrato</label>
+      <select class="custom-select" name="customer['id_contrato']">
+        <?php foreach($contratos as $contrato):?>
+          <option value="<?=$contrato['id']?>"><?=$contrato['cnpj']?> - <?=$contrato['razao_social']?></option>
+        <?php endforeach;?>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
       <label for="name">Nome</label>
       <input type="text" class="form-control" name="customer['name']">
     </div>
@@ -26,8 +34,7 @@
       <input type="password" class="form-control" name="pass">
     </div>
   </div>
-  <input type="hidden" value="1" name="customer['id_contrato']">
-  
+
   <div id="actions" class="row">
     <div class="col-md-12">
       <button type="submit" class="btn btn-primary">Salvar</button>

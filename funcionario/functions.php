@@ -32,10 +32,16 @@ function add() {
 	  $customer['modified'] = $customer['created'] = $today->format("Y-m-d H:i:s");
 	  $customer['sudo'] = 0;
 	  save('administrators', $customer);
-	//   header('location: index.php');
+	  header('location: index.php');
+	} else {
+		global $contratos;
+		$contratos = find_all('contrato');
 	}
   }
 
+  function clear_messages() {
+	  unset($_SESSION['messages']);
+  }
 
   /**
  *	Atualizacao/Edicao de Cliente

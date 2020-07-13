@@ -13,7 +13,7 @@ function clear_messages() {
 	unset($GLOBALS['messages']);
 }
 
-function isADM() {
+function isADM2() {
 	if($_SESSION['sudo'] == "1") {
 		return true;
 	}
@@ -45,7 +45,16 @@ function add() {
 	}
   }
 
-
+  function configurar_captive_edit($id) {
+	  if(!empty($_POST['customer'])) {
+		$customer = $_POST['customer'];
+		update('settings', $id, $customer);
+		echo "<script>window.history.go(-2)</script>";
+	  } else {
+		  global $captive;
+		  $captive = find('settings',$id);
+	  }
+  }
 
   function restart($id) {
 	require('../inc/ubnt.php');
@@ -99,18 +108,49 @@ function view($id) {
 
 function acessos_roteadores() {
 	global $customers;
-	if(!isADM()) {
-		header("Location: acessos_roteadores.php?id=".$_SESSION['id_contrato']);
+	if(!isADM2()) {
+		header("Location: acessos_roteadores_contrato.php?id=".$_SESSION['id_contrato']);
 	}
 	$db = open_database();
 	$SQL = "SELECT * FROM contrato";
 	$query = $db->query($SQL);
 	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 }
+
+function acessos_contrato() {
+	global $customers;
+	if(!isADM2()) {
+		header("Location: acessos_contrato_contrato.php?id=".$_SESSION['id_contrato']);
+	}
+	$db = open_database();
+	$SQL = "SELECT * FROM contrato";
+	$query = $db->query($SQL);
+	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+}
+
+function configurar_captive() {
+	global $customers;
+	if(!isADM2()) {
+		header("Location: configurar_captive_contrato.php?id=".$_SESSION['id_contrato']);
+	}
+	$db = open_database();
+	$SQL = "SELECT * FROM contrato";
+	$query = $db->query($SQL);
+	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+}
+
 function acessos_roteadores_contrato($id) {
 	global $customers;
 	$db = open_database();
-	$SQL = "SELECT * FROM aparelhos WHERE id_contrato='$id'";
+	$SQL = "SELECT * FROM aparelhos WHERE id_contrato='$id' ORDER BY id_aparelho ASC";
+	$query = $db->query($SQL);
+	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+}
+
+function configurar_captive_contrato($id) {
+	global $customers;
+	$db = open_database();
+	$SQL = "SELECT * FROM settings WHERE id_contrato='$id'";
 	$query = $db->query($SQL);
 	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 }

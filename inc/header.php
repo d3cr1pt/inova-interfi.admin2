@@ -4,6 +4,12 @@
   } else {
     header("Location: ".BASEURL."login.php");
   }
+  function isADM() {
+    if($_SESSION['sudo'] == "1") {
+      return true;
+    }
+    return false;
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,14 +47,16 @@
           <li class="nav-item active">
             <a class="nav-link" href="<?= BASEURL; ?>">Home <span class="sr-only">(current)</span></a>
           </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="<?=BASEURL?>contratos">Contratos</a>
-	  </li>
+          <?php if(isADM()): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=BASEURL?>contratos">Contratos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=BASEURL?>roteadores">Roteadores</a>
+          </li>
+          <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASEURL; ?>usuario">Usuários</a>
-          </li>
-	  <li class="nav-item">
-            <a class="nav-link" href="<?=BASEURL?>/roteadores">Roteadores</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASEURL; ?>funcionario">Funcionários</a>

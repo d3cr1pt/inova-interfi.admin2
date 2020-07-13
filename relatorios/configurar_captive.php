@@ -1,12 +1,12 @@
 <?php
    require_once('functions.php');
-   acessos_contrato();
+   configurar_captive();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
 
 <header>
-   <h2>[ADM] Selecionar Contrato - Relatório: Acessos (por dia)</h2>
+   <h2>[ADM] Selecionar Contrato - Relatório: Configurar Captive</h2>
 </header>
 
 <?php if (!empty($_SESSION['message'])) : ?>
@@ -32,7 +32,7 @@
    <tr>
       <td><?=$customer['razao_social']?></td>
       <td class="text-right">
-         <a href="acessos_contrato_contrato.php?id=<?=$customer['id']?>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Ver relatório</a>
+         <a href="configurar_captive_contrato.php?id=<?=$customer['id']?>" class="btn btn-danger"><i class="fas fa-cog"></i>&nbsp;Configurar</a>
       </td>
    </tr>
 <?php endforeach;?>
