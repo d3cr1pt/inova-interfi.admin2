@@ -26,7 +26,7 @@
 
 <div id="actions" class="mt-2 row">
 	<div class="col-md-12">
-	  <a href="index.php" class="btn btn-primary">Voltar</a>
+	  <a href="javascript:history.back()" class="btn btn-primary">Voltar</a>
 	</div>
 </div>
 

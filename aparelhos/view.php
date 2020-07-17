@@ -14,20 +14,9 @@
 
 <dl class="dl-horizontal">
     <?php
-    require('../inc/ubnt.php');
-        /* Controller Server */
-        $unifiServer =  "https://ubnt.interfi.net:8443";  
-        /* Controller admin user */
-        $unifiUser = "d3cr1pt";
-        /* Controller admin pass */
-        $unifiPass = "xyloksmith1@";
-        /* Controller version */
-        $unifiVersion = "5.13.29";
-        /* Controller site */
-        $unifiSite = "default";
-        $unifi_connection = new UniFi_API\Client($unifiUser, $unifiPass, $unifiServer, $unifiSite, $unifiVersion, false);
+        require('../inc/ubnt.php');
+        $unifi_connection = new UniFi_API\Client(UNIFI_LOGIN, UNIFI_PASSWORD, UNIFI_SERVER, 'default', UNIFI_VERSION, false);
         $login            = $unifi_connection->login();    
-        $aparelho['mac_aparelho'];
         $status_aparelho  = $unifi_connection->list_devices($aparelho['mac_aparelho']);
         $info_aparelho = json_decode(json_encode($status_aparelho),true);
     ?>
@@ -47,14 +36,16 @@
     <dd><?=$aparelho['mac_aparelho']?></dd>
     <dt>ID do Roteador Vivo:</dt>
     <dd><?=$aparelho['id_vivo']?></dd>
-    <dt>*Dispositivos Conectados:</dt>
-    <dd><?=$sessions['usuarios_conectados']?> dispositivo(s)</dd>
-    <p class="text-muted">* De acordo com a última verificação, quando o dispositivo esteve on-line.
+<?php if(isset($info_aparelho[0]['uptime'])) { ?>
+        <dt>*Dispositivos Conectados:</dt>
+        <dd><?=$sessions['usuarios_conectados']?> dispositivo(s)</dd>
+        <p class="text-muted">* De acordo com a última verificação, quando o dispositivo esteve on-line.
+<?php } ?>
 </dl>
 
 <div id="actions" class="mt-2 row">
 	<div class="col-md-12">
-	  <a href="index.php" class="btn btn-primary">Voltar</a>
+	  <a href="javascript:history.back()" class="btn btn-primary">Voltar</a>
 	</div>
 </div>
 

@@ -1,16 +1,12 @@
 <?php
    require_once('functions.php');
-   configurar_captive_contrato($_GET['id']);
+   equipamentos_contrato();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
 
 <header>
-	<div class="row">
-		<div class="col-sm-6">
-			<h2>Relatorio: Configurar Captive</h2>
-		</div>
-	</div>
+   <h2>[ADM] Selecionar Contrato - Relatório: Sites Bloqueados</h2>
 </header>
 
 <?php if (!empty($_SESSION['message'])) : ?>
@@ -25,8 +21,7 @@
 <table class="table table-hover table-light">
 <thead class="thead-light">
 	<tr>
-        <th>Configuração</th>
-        <th>Valor Atual</th>
+		<th>Contrato</th>
 		<th class="text-right">Opções</th>
 
 	</tr>
@@ -35,10 +30,9 @@
 <?php if(count($customers) > 0){ ?>
 <?php foreach($customers as $customer): ?>
    <tr>
-      <td><?=$customer['note']?></td>
-      <td><?=$customer['value']?></td>
+      <td><?=$customer['razao_social']?></td>
       <td class="text-right">
-         <?php if($customer['param'] != 'site_unifi' || isADM2()) {?><a href="<?=BASEURL?>relatorios/configurar_captive_edit.php?id=<?=$customer['id']?>" class="btn btn-danger"><i class="fas fa-pen"></i>&nbsp;Editar Valor</a> <?php } ?>
+         <a href="equipamentos_contrato_contrato.php?id=<?=$customer['id']?>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Ver relatório</a>
       </td>
    </tr>
 <?php endforeach;?>

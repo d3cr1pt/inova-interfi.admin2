@@ -35,17 +35,8 @@ function add() {
 
   function restart($id) {
 	require('../inc/ubnt.php');
-  	/* Controller Server */
-	$unifiServer =  "https://ubnt.interfi.net:8443";  
-	/* Controller admin user */
-	$unifiUser = "d3cr1pt";
-	/* Controller admin pass */
-	$unifiPass = "xyloksmith1@";
-	/* Controller version */
-	$unifiVersion = "5.13.29";
-	/* Controller site */
 	$unifiSite = "default";
-	$unifi_connection = new UniFi_API\Client($unifiUser, $unifiPass, $unifiServer, $unifiSite, $unifiVersion, false);
+	$unifi_connection = new UniFi_API\Client(UNIFI_LOGIN, UNIFI_PASSWORD, UNIFI_SERVER, $unifiSite, UNIFI_VERSION, false);
 	$login            = $unifi_connection->login();
 	$customers = find('aparelhos', $id);
 	$unifi_connection->restart_device($customers['mac_aparelho']);

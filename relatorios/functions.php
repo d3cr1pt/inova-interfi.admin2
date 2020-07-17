@@ -9,41 +9,16 @@ $customer = null;
 /**
  * Limpa as mensagens do banco
  */
-function clear_messages() {
-	unset($GLOBALS['messages']);
-}
-
-function isADM2() {
-	if($_SESSION['sudo'] == "1") {
-		return true;
+	function clear_messages() {
+		unset($_SESSION['message']);
 	}
-	return false;
-}
 
-/**
- *  Listagem de Clientes
- */
-function index() {
-	global $customers;
-	$customers = find_all('aparelhos');
-}
-
-/**
- *  Cadastro de Clientes
- */
-function add() {
-
-	if (!empty($_POST['customer'])) {
-	  
-	  $today = 
-		date_create('now', new DateTimeZone('America/Sao_Paulo'));
-  
-	  $customer = $_POST['customer'];
-	  $customer['modified'] = $customer['created'] = $today->format("Y-m-d H:i:s");
-	  save('aparelhos', $customer);
-	  header('location: index.php');
+	function isADM2() {
+		if($_SESSION['sudo'] == "1") {
+			return true;
+		}
+		return false;
 	}
-  }
 
   function configurar_captive_edit($id) {
 	  if(!empty($_POST['customer'])) {
@@ -56,101 +31,128 @@ function add() {
 	  }
   }
 
-  function restart($id) {
-	require('../inc/ubnt.php');
-  	/* Controller Server */
-	$unifiServer =  "https://ubnt.interfi.net:8443";  
-	/* Controller admin user */
-	$unifiUser = "d3cr1pt";
-	/* Controller admin pass */
-	$unifiPass = "xyloksmith1@";
-	/* Controller version */
-	$unifiVersion = "5.13.29";
-	/* Controller site */
-	$unifiSite = "default";
-	$unifi_connection = new UniFi_API\Client($unifiUser, $unifiPass, $unifiServer, $unifiSite, $unifiVersion, false);
-	$login            = $unifi_connection->login();
-	$customers = find('aparelhos', $id);
-	$unifi_connection->restart_device($customers['mac_aparelho']);
-	header('location: ./');
-}
-
-function upgrade($id) {
-	require('../inc/ubnt.php');
-/* Controller Server */
-$unifiServer =  "https://ubnt.interfi.net:8443";  
-	/* Controller admin user */
-	$unifiUser = "d3cr1pt";
-	/* Controller admin pass */
-	$unifiPass = "xyloksmith1@";
-	/* Controller version */
-	$unifiVersion = "5.13.29";
-	/* Controller site */
-	$unifiSite = "default";
-	$unifi_connection = new UniFi_API\Client($unifiUser, $unifiPass, $unifiServer, $unifiSite, $unifiVersion, false);
-	$login            = $unifi_connection->login();
-	$customers = find('aparelhos', $id);
-	$unifi_connection->upgrade_device($customers['mac_aparelho']);		
-	header('location: ./');
-}
-
-function view($id) {
-	$db = open_database();
-	global $aparelho;
-	$aparelho = find('aparelhos', $id);
-	$id_contrato = $aparelho['id_contrato'];
-	global $customer;
-	$customer = find('contrato',$id_contrato);
-	global $sessions;
-	$query3 = $db->query("SELECT COUNT(sessions.id) AS usuarios_conectados FROM sessions LEFT JOIN users ON (sessions.user_id=users.id) LEFT JOIN contrato ON (users.id_contrato=contrato.id) WHERE id_contrato = '$id_contrato'");
-	$sessions = $query3->fetch_assoc();
-}
-
-function acessos_roteadores() {
-	global $customers;
-	if(!isADM2()) {
-		header("Location: acessos_roteadores_contrato.php?id=".$_SESSION['id_contrato']);
+  function config_guest_edit($id) {
+	if(!empty($_POST['customer'])) {
+	  $customer = $_POST['customer'];
+	  update('settings', $id, $customer);
+	  echo "<script>window.history.go(-2)</script>";
+	} else {
+		global $captive;
+		$captive = find('settings',$id);
 	}
-	$db = open_database();
-	$SQL = "SELECT * FROM contrato";
-	$query = $db->query($SQL);
-	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 }
 
-function acessos_contrato() {
-	global $customers;
-	if(!isADM2()) {
-		header("Location: acessos_contrato_contrato.php?id=".$_SESSION['id_contrato']);
+	function acessos_roteadores() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: acessos_roteadores_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 	}
-	$db = open_database();
-	$SQL = "SELECT * FROM contrato";
-	$query = $db->query($SQL);
-	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
-}
 
-function configurar_captive() {
-	global $customers;
-	if(!isADM2()) {
-		header("Location: configurar_captive_contrato.php?id=".$_SESSION['id_contrato']);
+	function acessos_contrato() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: acessos_contrato_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 	}
-	$db = open_database();
-	$SQL = "SELECT * FROM contrato";
-	$query = $db->query($SQL);
-	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
-}
 
-function acessos_roteadores_contrato($id) {
-	global $customers;
-	$db = open_database();
-	$SQL = "SELECT * FROM aparelhos WHERE id_contrato='$id' ORDER BY id_aparelho ASC";
-	$query = $db->query($SQL);
-	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
-}
+	function configurar_captive() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: configurar_captive_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
 
-function configurar_captive_contrato($id) {
-	global $customers;
-	$db = open_database();
-	$SQL = "SELECT * FROM settings WHERE id_contrato='$id'";
-	$query = $db->query($SQL);
-	$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
-}
+	function config_guest() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: config_guest_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function acessos_roteadores_contrato($id) {
+		global $customers;
+		$db = open_database();
+		$SQL = "SELECT * FROM aparelhos WHERE id_contrato='$id' ORDER BY id_aparelho ASC";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function conectados_contrato() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: configurar_captive_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function equipamentos_contrato() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: equipamentos_contrato_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function disponibilidade_roteadores() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: disponibilidade_roteadores_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function configurar_captive_contrato($id) {
+		global $customers;
+		$db = open_database();
+		$SQL = "SELECT * FROM settings WHERE id_contrato='$id'";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function config_guest_contrato($id) {
+		global $customers;
+		$db = open_database();
+		$SQL = "SELECT * FROM settings WHERE id_contrato='$id' AND param LIKE '%link_limit'";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function conectados_contrato_contrato($id) {
+		global $customers;
+		$db = open_database();
+		$SQL = "SELECT * FROM users WHERE id_contrato='$id'";
+		$query = $db->query($SQL);
+		$customers=[]; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function equipamentos_contrato_contrato($id) {
+		global $customers;
+		$db = open_database();
+		$SQL = "SELECT * FROM aparelhos WHERE id_contrato='$id'";
+	}

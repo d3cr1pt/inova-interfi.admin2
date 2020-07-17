@@ -1,6 +1,6 @@
 <?php 
   require_once('functions.php'); 
-  configurar_captive_edit($_GET['id']);
+  config_guest_edit($_GET['id']);
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
@@ -30,7 +30,7 @@
   <div id="actions" class="row">
     <div class="col-md-12">
       <button type="submit" class="btn btn-primary">Salvar</button>
-      <a href="configurar_captive.php" class="btn btn-default">Cancelar</a>
+      <a href="config_guest.php" class="btn btn-default">Cancelar</a>
     </div>
   </div>
 </form>

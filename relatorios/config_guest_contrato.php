@@ -1,6 +1,6 @@
 <?php
    require_once('functions.php');
-   configurar_captive_contrato($_GET['id']);
+   config_guest_contrato($_GET['id']);
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
@@ -8,7 +8,7 @@
 <header>
 	<div class="row">
 		<div class="col-sm-6">
-			<h2>Relatorio: Configurar Captive</h2>
+			<h2>Relatorio: Configurar Limites</h2>
 		</div>
 	</div>
 </header>
@@ -38,7 +38,7 @@
       <td><?=$customer['note']?></td>
       <td><?=$customer['value']?></td>
       <td class="text-right">
-         <?php if($customer['param'] != 'site_unifi' || isADM2()) {?><a href="<?=BASEURL?>relatorios/configurar_captive_edit.php?id=<?=$customer['id']?>" class="btn btn-danger"><i class="fas fa-pen"></i>&nbsp;Editar Valor</a> <?php } ?>
+         <?php if($customer['param'] != 'site_unifi' || isADM2()) {?><a href="<?=BASEURL?>relatorios/config_guest_edit.php?id=<?=$customer['id']?>" class="btn btn-danger"><i class="fas fa-pen"></i>&nbsp;Editar Valor</a> <?php } ?>
       </td>
    </tr>
 <?php endforeach;?>
