@@ -1,12 +1,12 @@
 <?php
    require_once('functions.php');
-   disponibilidade_roteadores();
+   stat_clientes();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
 
 <header>
-   <h2>[ADM] Selecionar Contrato - Relatório: Atualização dos Roteadores</h2>
+   <h2>[ADM] Selecionar Contrato - Relatório: Uso dos usuários</h2>
 </header>
 
 <?php if (!empty($_SESSION['message'])) : ?>
@@ -32,7 +32,7 @@
    <tr>
       <td><?=$customer['razao_social']?></td>
       <td class="text-right">
-         <a href="firmware_upgrade_contrato.php?id=<?=$customer['id']?>" class="btn btn-warning"><i class="fas fa-wifi"></i>&nbsp;Verificar</a>
+         <a href="stat_clientes_contrato.php?id=<?=$customer['id']?>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Ver relatório</a>
       </td>
    </tr>
 <?php endforeach;?>

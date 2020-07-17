@@ -116,6 +116,28 @@ $customer = null;
 		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 	}
 
+	function guest_use() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: guest_use_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function stat_clientes() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: stat_clientes_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+	
 	function disponibilidade_roteadores() {
 		global $customers;
 		if(!isADM2()) {
@@ -186,6 +208,15 @@ $customer = null;
 			$db->query($SQL);
 			header("Location: squid_blacklist.php");
 		}
+	}
+
+	function squid_blacklist_add_hidden() {
+		$customer = [];
+		$customer['fqdn'] = $_POST['fqdn'];
+		$customer['id_contrato'] = $_POST['id_contrato'];
+		$db = open_database();
+		$SQL = "INSERT INTO black_list (fqdn,id_contrato) VALUES ('".$customer['fqdn']."','".$customer['id_contrato']."')";
+		$db->query($SQL);
 	}
 
 	function squid_blacklist_view($id) {

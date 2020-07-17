@@ -60,7 +60,7 @@
    </tr>
    <tr>
       <td>Visualizar consumo de dados (por roteador)</td>
-      <td class="text-right"><a href="stat_client.php" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Ver uso</a></td>
+      <td class="text-right"><a href="stat_clientes.php" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Ver uso</a></td>
    </tr>
    <tr>
       <td>Configurar sites bloqueados (no contrato)</td>

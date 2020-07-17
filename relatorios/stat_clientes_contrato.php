@@ -19,8 +19,8 @@
 
 <header>
 	<div class="row">
-		<div class="col-sm-9">
-			<h2>Relatorio: Atualização dos Roteadores</h2>
+		<div class="col-sm-6">
+			<h2>Relatorio: Status dos Equipamentos</h2>
 		</div>
 	</div>
 </header>
@@ -38,22 +38,25 @@
 <thead class="thead-light">
 	<tr>
         <th>Status</th>
+        <th>Dados Usados</th>
         <th>Roteador</th>
-<?php if(isADM()) { ?><th>MAC do Roteador</th><?php } ?>
-		<th>Opções</th>
+		<th class="text-right">Opções</th>
+
 	</tr>
 </thead>
 <tbody>
 <?php if(count($customers) > 0){ ?>
 <?php foreach($customers as $customer): ?>
-<?php $status_aparelho  = $unifi_connection->stat_daily_aps((date_timestamp_get($date = date_create())-(24*60*60)),date_timestamp_get(date_create()),$customer['mac_aparelho']); ?>
+<?php $status_aparelho  = $unifi_connection->list_devices($customer['mac_aparelho']); ?>
 <?php $info_aparelho = json_decode(json_encode($status_aparelho),true); ?>
    <tr>
       <?php if(isset($info_aparelho[0]['uptime'])) { echo '<td><i class="fas fa-wifi">>/i>&nbsp;Online</td>'; } else { echo '<td><span class="iconify" data-icon="uil-wifi-slash" data-inline="false"></span>&nbsp;Offline</td>';}?></dd>
+      <td><?php if(!$info_aparelho) { echo "0MB"; } /* não consigo ver ainda, pq nao tem dados mas tem que colocar o echo do valor correto*/?></td>
       <td>InterFI <?=$customer['id_aparelho']?> / <?=$customer['prefix_carro']?></td>
-      <?php if(isADM()) { ?><td><?=$customer['mac_aparelho']?></td><?php } ?>
-      <td>
-         <?php if(isset($info_aparelho[0]['upgradable'])) { if($info_aparelho[0]['upgradable']) { echo '<a href="upgrade.php?id="'.$aparelho['id'].' class="btn btn-warning"><i class="fas fa-sync-alt"></i>&nbsp;Instalar Atualizações</a>';} else { echo 'Todas Atualizações Instaladas'; } } else { echo "Verificação Indisponível. Cheque status do dispositivo.";}?>
+      <td class="text-right">
+		<?php if(isset($info_aparelho[0]['uptime'])) { ?><a href="<?=BASEURL?>aparelhos/restart.php?id=<?=$customer['id']?>" class="btn btn-warning"><i class="fas fa-sync-alt"></i>&nbsp;Reiniciar</a><?php } ?>
+		<a href="<?=BASEURL?>aparelhos/view.php?id=<?=$customer['id']?>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
+		<a href="<?=BASEURL?>aparelhos/edit.php?id=<?=$customer['id']?>" class="btn btn-danger"><i class="fas fa-pen"></i>&nbsp;Deletar</a>
       </td>
 	  
    </tr>

@@ -10,7 +10,7 @@
    $unifi_connection = new UniFi_API\Client(UNIFI_LOGIN, UNIFI_PASSWORD, UNIFI_SERVER, $unifi_site, UNIFI_VERSION, false);
    $login = $unifi_connection->login();
    global $customers;
-   echo $SQL2 = "SELECT * FROM aparelhos WHERE id_contrato = '$id_contrato'";
+   $SQL2 = "SELECT * FROM aparelhos WHERE id_contrato = '$id_contrato'";
    $query2 = $db->query($SQL2);
    $customers=[]; while($customer=$query2->fetch_assoc()) { $customers[]=$customer; }
 ?>
