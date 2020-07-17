@@ -40,6 +40,7 @@
         <th>Status</th>
         <th>Dados Usados</th>
         <th>Roteador</th>
+        <th>MAC do Aparelho</th>
 		<th class="text-right">Opções</th>
 
 	</tr>
@@ -50,9 +51,10 @@
 <?php $status_aparelho  = $unifi_connection->list_devices($customer['mac_aparelho']); ?>
 <?php $info_aparelho = json_decode(json_encode($status_aparelho),true); ?>
    <tr>
-      <?php if(isset($info_aparelho[0]['uptime'])) { echo '<td><i class="fas fa-wifi">>/i>&nbsp;Online</td>'; } else { echo '<td><span class="iconify" data-icon="uil-wifi-slash" data-inline="false"></span>&nbsp;Offline</td>';}?></dd>
+      <?php if(isset($info_aparelho[0]['uptime'])) { echo '<td><i class="fas fa-wifi">>/i>&nbsp;Online</td>'; } else { echo '<td><span class="iconify" data-icon="uil-wifi-slash" data-inline="true" style="margin-bottom: 1px"></span>&nbsp;Offline</td>';}?></dd>
       <td><?php if(!$info_aparelho) { echo "0MB"; } /* não consigo ver ainda, pq nao tem dados mas tem que colocar o echo do valor correto*/?></td>
       <td>InterFI <?=$customer['id_aparelho']?> / <?=$customer['prefix_carro']?></td>
+      <td><?=$customer['mac_aparelho']?></td>
       <td class="text-right">
 		<?php if(isset($info_aparelho[0]['uptime'])) { ?><a href="<?=BASEURL?>aparelhos/restart.php?id=<?=$customer['id']?>" class="btn btn-warning"><i class="fas fa-sync-alt"></i>&nbsp;Reiniciar</a><?php } ?>
 		<a href="<?=BASEURL?>aparelhos/view.php?id=<?=$customer['id']?>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
