@@ -127,6 +127,17 @@ $customer = null;
 		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
 	}
 
+	function firmware_upgrade() {
+		global $customers;
+		if(!isADM2()) {
+			header("Location: firmware_upgrade_contrato.php?id=".$_SESSION['id_contrato']);
+		}
+		$db = open_database();
+		$SQL = "SELECT * FROM contrato";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
 	function configurar_captive_contrato($id) {
 		global $customers;
 		$db = open_database();
@@ -155,4 +166,39 @@ $customer = null;
 		global $customers;
 		$db = open_database();
 		$SQL = "SELECT * FROM aparelhos WHERE id_contrato='$id'";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function squid_blacklist_contrato($id) {
+		global $customers;
+		$db = open_database();
+		$SQL = "SELECT * FROM black_list WHERE id_contrato='$id'";
+		$query = $db->query($SQL);
+		$customers = []; while($customer=$query->fetch_assoc()) { $customers[]=$customer; }
+	}
+
+	function squid_blacklist_add() {
+		if(!empty($_POST['customer'])) {
+			($customer = $_POST['customer']);
+			$db = open_database();
+			$SQL = "INSERT INTO black_list (fqdn,id_contrato) VALUES ('".$customer['fqdn']."','".$customer['id_contrato']."')";
+			$db->query($SQL);
+			header("Location: squid_blacklist.php");
+		}
+	}
+
+	function squid_blacklist_view($id) {
+		global $customer;
+		$db = open_database();
+		$SQL = "SELECT * FROM black_list WHERE id = '$id'";
+		$query = $db->query($SQL);
+		$customer = $query->fetch_assoc();
+	}
+
+	function squid_blacklist_delete($id) {
+		$db = open_database();
+		echo $SQL = "DELETE FROM black_list WHERE id = '$id'";
+		$query = $db->query($SQL);
+		header("Location: squid_blacklist.php");
 	}
